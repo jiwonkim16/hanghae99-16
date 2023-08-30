@@ -1,44 +1,29 @@
 import React from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleToDo, deleteToDo } from "./redux/modules/reduceToDo";
-function Box() {
+function Box(props) {
   const dispatch = useDispatch();
-  const todoList = useSelector((state) => {
-    // console.log(state.reduceToDo.todoList);
-    return state.reduceToDo.todoList; // todolist 배열
-  });
+  // const todoList = useSelector((state) => {
+  //   // console.log(state.reduceToDo.todoList);
+  //   return state.reduceToDo.todoList; // todolist 배열
+  // });
 
   const toggleBtn = () => {
-    dispatch(toggleToDo());
+    dispatch(toggleToDo(props.id));
   };
   const removeBtn = () => {
-    dispatch(deleteToDo());
+    dispatch(deleteToDo(props.id));
   };
 
   return (
     <div>
-      {todoList.map((todo) => {
-        return (
-          <div key={todo.id}>
-            <div>{todo.title}</div>
-            <div>{todo.comment}</div>
-            <button
-              onClick={() => {
-                toggleBtn();
-              }}
-            >
-              {todo.isDone ? "취소" : "완료"}
-            </button>
-            <button
-              onClick={() => {
-                removeBtn();
-              }}
-            >
-              삭제
-            </button>
-          </div>
-        );
-      })}
+      <div>
+        <div>{props.title}</div>
+        <div>{props.comment}</div>
+        <button onClick={toggleBtn}>{props.isDone ? "취소" : "완료"}</button>
+        <button onClick={removeBtn}>삭제</button>
+      </div>
     </div>
   );
 }

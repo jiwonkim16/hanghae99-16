@@ -14,16 +14,17 @@ export const addToDo = (title, comment) => {
     id: Date.now(),
   };
 };
-export const deleteToDo = () => {
+export const deleteToDo = (id) => {
   return {
     type: DELETE_ONE,
+    id,
   };
 };
-export const toggleToDo = () => {
-  // 기존 데이터를 쓰고 싶은데...
+
+export const toggleToDo = (id) => {
   return {
     type: TOGGLE_ONE,
-    isDone: true,
+    id,
   };
 };
 // 초기값
@@ -42,18 +43,21 @@ const initalState = {
 const reduceToDo = (state = initalState, action) => {
   const newState = { ...state };
   const newToDoList = [...newState.todoList, action];
-  // console.log([...newState.todoList, action]);
   switch (action.type) {
     case ADD_ONE:
       return {
         todoList: newToDoList,
       };
     case DELETE_ONE:
-      return null;
+      const deleteBox = newState.todoList.filter(
+        (item) => action.id !== item.id
+      );
+      return { todoList: deleteBox };
     case TOGGLE_ONE:
-      return {
-        todoList: newToDoList.filter((todo) => todo.isDone),
-      };
+      newState.todoList.forEach((item) =>
+        action.id == item.id ? (item.isDone = !item.isDone) : item
+      );
+      return { todoList: newState.todoList };
     default:
       return newState;
   }

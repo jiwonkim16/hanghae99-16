@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToDo } from "./redux/modules/reduceToDo";
 import Box from "./Box";
@@ -8,12 +8,34 @@ function App() {
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
 
-  const todoList = useSelector((state) => {
-    // console.log(state.reduceToDo.todoList);
-    return state.reduceToDo.todoList; // todolist 배열
+  const todoIsDone = useSelector((state) => {
+    return state.reduceToDo;
   });
-  const notToDo = todoList.filter((item) => item.isDone == false);
-  const doneToDo = todoList.filter((item) => item.isDone == true);
+  const todoList = todoIsDone.todoList;
+
+  const notToDo = todoList
+    .filter((item) => item.isDone == false)
+    .map((item) => (
+      <Box
+        key={item.id}
+        title={item.title}
+        comment={item.comment}
+        isDone={item.isDone}
+        id={item.id}
+      />
+    ));
+
+  const doneToDo = todoList
+    .filter((item) => item.isDone == true)
+    .map((item) => (
+      <Box
+        key={item.id}
+        title={item.title}
+        comment={item.comment}
+        isDone={item.isDone}
+        id={item.id}
+      />
+    ));
 
   const titleChange = (e) => {
     setTitle(e.target.value);
@@ -22,10 +44,8 @@ function App() {
     setComment(e.target.value);
   };
   const onSubmit = (e) => {
-    // 여기서 store로 저장되야..
     e.preventDefault();
     dispatch(addToDo(title, comment));
-    // console.log(title, comment);
     setTitle("");
     setComment("");
   };
@@ -51,13 +71,9 @@ function App() {
         <button onClick={onSubmit}>입력하기</button>
       </form>
       <div>Working...🔥</div>
-      {notToDo.map((todo) => (
-        <Box key={todo.id} />
-      ))}
+      {notToDo}
       <div>Done...🥳</div>
-      {doneToDo.map((todo) => (
-        <Box key={todo.id} />
-      ))}
+      {doneToDo}
     </div>
   );
 }
