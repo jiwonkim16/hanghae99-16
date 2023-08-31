@@ -1,7 +1,7 @@
 import React from "react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleToDo, deleteToDo } from "./redux/modules/reduceToDo";
+import { Link, useParams } from "react-router-dom";
 function Box(props) {
   const dispatch = useDispatch();
   // const todoList = useSelector((state) => {
@@ -19,6 +19,7 @@ function Box(props) {
   return (
     <div>
       <div>
+        <Link to="/detail">상세보기</Link>
         <div>{props.title}</div>
         <div>{props.comment}</div>
         <button onClick={toggleBtn}>{props.isDone ? "취소" : "완료"}</button>
