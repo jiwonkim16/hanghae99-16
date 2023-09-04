@@ -11,6 +11,7 @@ const Container = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  margin: 0 auto;
 `;
 const Header = styled.div`
   border: 1px solid grey;
@@ -57,12 +58,13 @@ const WorkingBox = styled.div`
   align-items: flex-start;
   justify-content: center;
   margin-bottom: 15px;
+  width: 1000px;
 `;
 const MainBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 10px;
+  justify-content: center;
+  margin: 20px;
   width: 80%;
   flex-wrap: wrap;
 `;
@@ -141,11 +143,11 @@ function Home() {
         <button onClick={onSubmit}>입력하기</button>
       </Form>
       <WorkingBox>
-        <span>Working...🔥</span>
+        <div>Working...🔥</div>
         <MainBox>{notToDo}</MainBox>
       </WorkingBox>
       <WorkingBox>
-        <span>Done...🥳</span>
+        <div>Done...🥳</div>
         <MainBox>{doneToDo}</MainBox>
       </WorkingBox>
     </Container>
