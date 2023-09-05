@@ -1,5 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
+import api from "./axios/api";
 import { useEffect, useState } from "react";
+import instance from "./axios/api";
 
 function App() {
   const [todos, setTodos] = useState(null);
@@ -16,16 +18,17 @@ function App() {
   const onClick = async (event) => {
     event.preventDefault();
     // 버튼 클릭시 state를 이용하여 DB에 저장(post요청)
-    axios.post("http://localhost:4000/todos", inputValue);
+    instance.post("/todos", inputValue);
     fetchTodos();
   };
 
   const fetchTodos = async () => {
-    const { data } = await axios.get("http://localhost:4000/todos");
+    // const { data } = await axios.get("http://localhost:4000/todos");
+    const { data } = await instance.get("/todos");
     setTodos(data);
   };
   const onDeleteBtn = async (id) => {
-    axios.delete(`http://localhost:4000/todos/${id}`);
+    instance.delete(`/todos/${id}`);
     setTodos(
       todos.filter((item) => {
         return item.id !== id;
@@ -34,7 +37,7 @@ function App() {
   };
 
   const onUpdateBtn = async () => {
-    axios.patch(`http://localhost:4000/todos/${targetId}`, {
+    instance.patch(`/todos/${targetId}`, {
       title: contents,
     });
 
