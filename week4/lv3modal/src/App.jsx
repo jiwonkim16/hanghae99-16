@@ -1,7 +1,7 @@
 import Button from "./components/Button";
 import Input from "./components/Input";
 import Modal from "./components/Modal";
-import Select from "./components/Select";
+import SelectBar from "./components/SelectBar";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Modal />
       </div>
       <div>
-        <Select />
+        <SelectBar />
       </div>
     </>
   );
