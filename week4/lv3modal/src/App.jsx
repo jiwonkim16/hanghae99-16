@@ -1,8 +1,7 @@
-import Button from "./components/Button";
-import Input from "./components/Input";
-import Modal from "./components/Modal";
-import SelectBar from "./components/SelectBar";
-
+import Button from "./components/Button/Button";
+import TestInput from "./components/Input/TestInput";
+import Select from "./components/Select/Select";
+import TestModal from "./components/Modal/TestModal";
 function App() {
   return (
     <>
@@ -10,13 +9,13 @@ function App() {
         <Button />
       </div>
       <div>
-        <Input />
+        <TestInput />
       </div>
       <div>
-        <Modal />
+        <TestModal />
       </div>
       <div>
-        <SelectBar />
+        <Select />
       </div>
     </>
   );
